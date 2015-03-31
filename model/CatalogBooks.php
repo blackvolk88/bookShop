@@ -44,16 +44,55 @@ class CatalogBooks
         return $res;
     }
 	
-	public function selectBooksByGenre($name)
+	public function getBooksByGenre($name)
 		{
-			$query = "SELECT * FROM books
-			JOIN book2genre
-			ON books2genre.id_book = books.id
-			JOIN genres
-			ON genres.genre_id = genre.id
-			WHERE genres = '$name'";
-			$res = $this->mysql->query($query);
-			return $res;
+            if(is_array($name))
+            {
+                $query = "SELECT * FROM catalogbooks
+                JOIN book2genre
+                ON book2genre.id_book = catalogbooks.id
+                JOIN genres
+                ON book2genre.id_genre = genres.id
+                WHERE genres = '". implode($name) ."'";
+            }
+            else
+            {
+                $query = "SELECT * FROM catalogbooks
+                JOIN book2genre
+                ON book2genre.id_book = catalogbooks.id
+                JOIN genres
+                ON book2genre.id_genre = genres.id
+                WHERE genres = '$name'";
+            }
+            $res = $this->mysql->select($query);
+            return $res;
 		}
+
+    public function getBooksByAuthor($name)
+    {
+        if(is_array($name))
+        {
+            $query = "SELECT * FROM catalogbooks
+            JOIN book2autors
+            ON book2author.id_book = catalogbooks.id
+            JOIN authors
+            ON book2authors.id_author = authors.id
+            WHERE authors = '" . implode($name) . "'";
+        }
+        else
+        {
+            $query = "SELECT * FROM catalogbooks
+            JOIN book2autors
+            ON book2authors.id_book = catalogbooks.id
+            JOIN authors
+            ON book2authors.id_author = authors.id
+            WHERE authors = '$name'";
+        }
+        $res = $this->mysql->select($query);
+        return $res;
+    }
+
+
+
 
 }
