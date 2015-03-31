@@ -10,7 +10,7 @@ class CatalogBooks
         $this->mysql = MySql::getInstance();
     }
 
-    public function catalogsAdd($data)
+    public function bookAdd($data)
     {
         $res = $this->mysql->insert('catalogbooks', $data);
         if($res)
@@ -19,7 +19,7 @@ class CatalogBooks
             return false;
     }
 
-    public function catalogsDelete($where)
+    public function bookDelete($where)
     {
         $res = $this->mysql->delete('catalogbooks', $where);
         if($res)
@@ -28,7 +28,7 @@ class CatalogBooks
             return false;
     }
 
-    public function catalogsUpdate($where, $data)
+    public function bookUpdate($where, $data)
     {
         $res = $this->mysql->update('catalogbooks', $where, $data);
         if($res)
@@ -37,12 +37,23 @@ class CatalogBooks
             return false;
     }
 
-    public function catalogsSelectAll()
+    public function bookSelectAll()
     {
         $query = "SELECT * FROM catalogbooks";
         $res = $this->mysql->select($query);
         return $res;
     }
-
+	
+	public function selectBooksByGenre($name)
+		{
+			$query = "SELECT * FROM books
+			JOIN book2genre
+			ON books2genre.id_book = books.id
+			JOIN genres
+			ON genres.genre_id = genre.id
+			WHERE genres = '$name'";
+			$res = $this->mysql->query($query);
+			return $res;
+		}
 
 }
