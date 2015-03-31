@@ -92,7 +92,11 @@ class CatalogBooks
         return $res;
     }
 
-
-
+    public function getBookById($id)
+    {
+        $query = "SELECT * FROM catalogbooks WHERE id = '$id'";
+        $res = $this->mysql->select($query);
+        return $res;
+    }
 
 }
