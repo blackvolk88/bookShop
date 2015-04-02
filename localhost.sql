@@ -8,7 +8,7 @@
 -- Версия PHP: 5.3.29
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-SET time_zone = "+00:00";
+SET time_zone = "+02:00";
 
 
 --
@@ -110,8 +110,7 @@ CREATE TABLE IF NOT EXISTS `ORDERS` (
 `order_id` int(11) NOT NULL,
   `user_id` int(11) NOT NULL,
   `payment_id` int(11) NOT NULL,
-  `status_id` int(11) NOT NULL,
-  `datetime` date NOT NULL,
+  `date` DATETIME DEFAULT CURRENT_TIMESTAMP,
   `status_name` varchar(150) NOT NULL,
   `order_sum` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=cp1251;
@@ -147,6 +146,7 @@ CREATE TABLE IF NOT EXISTS `STATUSORDER` (
 CREATE TABLE IF NOT EXISTS `USER` (
 `user_id` int(11) NOT NULL,
   `login` varchar(150) NOT NULL,
+  `email` varchar(150) NOT NULL,
   `password` varchar(100) NOT NULL,
   `discount_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=cp1251;

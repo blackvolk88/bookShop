@@ -1,6 +1,6 @@
 <?php
 
-    require_once (dirname(__FILE__).'/../models/Genres.php');
+    require_once (dirname(__FILE__).'/../model/Genres.php');
 	
     class AuthorController  {
         

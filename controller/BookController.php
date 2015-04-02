@@ -1,6 +1,6 @@
 <?php
     
-	require_once (dirname(__FILE__).'/../models/CatalogBooks.php');
+	require_once (dirname(__FILE__).'/../model/CatalogBooks.php');
     
     class BookController {
 	
