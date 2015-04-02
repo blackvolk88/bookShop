@@ -1,9 +1,11 @@
 <?php
 	require_once (dirname(__FILE__).'/../model/Users.php');
+    require_once (dirname(__FILE__).'/../model/Discount.php');
 	
     class userController  {
         
 		private $model;
+        private $discount;
 		
 		public function __construct()
 		{
@@ -16,9 +18,9 @@
             return $res;
         }
 
-        public function updateUser($where, $data)
+        public function updateUser($id, $dataUser)
         {
-            $res = $this->model->usersUpdate($where, $data);
+            $res = $this->model->usersUpdate($id, $dataUser);
             return $res;
         }
 
@@ -40,11 +42,10 @@
             return $res;
         }
 
-        public function checkEmail($email)
+        public function addDiscount($idUser, $idDiscount)
         {
-            $res = $this->model->returnEmail($email);
+            $res = $this->discount->discountAddUser($idDiscount, $idUser);
             return $res;
         }
-
 		
 	}

@@ -28,9 +28,10 @@ class CatalogBooks
             return false;
     }
 
-    public function bookUpdate($where, $data)
+    public function bookUpdate($dataBook, $id)
     {
-        $res = $this->mysql->update('catalogbooks', $where, $data);
+        $where = array('id' => $id);
+        $res = $this->mysql->update('catalogbooks', $where, $dataBook);
         if($res)
             return true;
         else

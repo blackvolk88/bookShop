@@ -9,6 +9,6 @@ class Users
     {
         $this->mysql = MySql::getInstance();
     }
-	
-	
+
+}
 ?>

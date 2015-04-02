@@ -28,9 +28,10 @@ class Users
             return false;
     }
 
-    public function usersUpdate($where, $data)
+    public function usersUpdate($id, $dataUser)
     {
-        $res = $this->mysql->update('user', $where, $data);
+        $where = array('id' => $id);
+        $res = $this->mysql->update('user', $where, $dataUser);
         if($res)
             return true;
         else

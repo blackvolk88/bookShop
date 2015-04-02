@@ -28,8 +28,10 @@ class Genres
             return false;
     }
 
-    public function genresUpdate($where, $data)
+    public function genresUpdate($id, $genreName)
     {
+        $data = array('genres' => $genreName);
+        $where = array('id' => $id);
         $res = $this->mysql->update('genres', $where, $data);
         if($res)
             return true;

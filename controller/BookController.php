@@ -17,9 +17,9 @@
             return $res;
         }
 
-        public function updateBook($where, $data)
+        public function updateBook($id, $dataBook)
         {
-            $res = $this->model->bookUpdate($where, $data);
+            $res = $this->model->bookUpdate($id, $dataBook);
             return $res;
         }
 

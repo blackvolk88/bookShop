@@ -23,9 +23,9 @@
             return $res;
         }
 
-        public function updateAuthors($where, $data)
+        public function updateAuthors($id, $authorName)
         {
-            $res = $this->model->authorsUpdate($where, $data);
+            $res = $this->model->authorsUpdate($id, $authorName);
             return $res;
         }
 

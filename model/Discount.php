@@ -28,8 +28,10 @@ class Discount
             return false;
     }
 
-    public function discountUpdate($where, $data)
+    public function discountUpdate($id, $discSize)
     {
+        $data = array('discount_size' => $discSize);
+        $where = array('id' => $id);
         $res = $this->mysql->update('discount', $where, $data);
         if($res)
             return true;
@@ -44,5 +46,12 @@ class Discount
         return $res;
     }
 
+    public function discountAddUser($idDiscount, $idUser)
+    {
+        $data = array('discount_id' => $idDiscount);
+        $where = array('id' => $idUser);
+        $res = $this->mysql->update('user', $where, $data);
+        return $res;
+    }
 
 }

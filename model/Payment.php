@@ -28,8 +28,10 @@ class Payment
             return false;
     }
 
-    public function paymentsUpdate($where, $data)
+    public function paymentsUpdate($id, $payName)
     {
+        $data = array('payment_name' => $payName);
+        $where = array('id' => $id);
         $res = $this->mysql->update('payment', $where, $data);
         if($res)
             return true;

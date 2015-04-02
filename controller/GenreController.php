@@ -22,9 +22,9 @@
             return $res;
         }
 
-        public function updateAuthors($where, $data)
+        public function updateAuthors($id, $genreName)
         {
-            $res = $this->model->genresUpdate($where, $data);
+            $res = $this->model->genresUpdate($id, $genreName);
             return $res;
         }
 

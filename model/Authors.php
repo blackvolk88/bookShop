@@ -28,8 +28,10 @@ class Authors
             return false;
     }
 
-    public function authorsUpdate($where, $data)
+    public function authorsUpdate($id, $authorName)
     {
+        $data = array('authors' => $authorName);
+        $where = array('id' => $id);
         $res = $this->mysql->update('authors', $where, $data);
         if($res)
             return true;
