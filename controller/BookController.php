@@ -10,7 +10,25 @@
 		{
 			$this->model = new CatalogBooks();
 		}
-        
+
+        public function addBook($data)
+        {
+            $res = $this->model->bookAdd($data);
+            return $res;
+        }
+
+        public function updateBook($where, $data)
+        {
+            $res = $this->model->bookUpdate($where, $data);
+            return $res;
+        }
+
+        public function deleteBook($where)
+        {
+            $res = $this->model->bookDelete($where);
+            return $res;
+        }
+
         public function getBooks()
         {
             $res = $this->model->bookSelectAll();
@@ -23,30 +41,18 @@
             return $res;
         }       
 		
-		public function getBooksAuthor($name)
+		public function getBooksAuthor($id)
         {
-            $res = $this->model->getBooksByAuthor($name);
+            $res = $this->model->getBooksByAuthor($id);
             return $res;
         }
 		
-		public function getBooksGenre($name)
+		public function getBooksGenre($id)
         {
-            $res = $this->model->getBooksByGenre($name);
+            $res = $this->model->getBooksByGenre($id);
             return $res;
         }
-		
-		public function getAuthorsBook($id)
-        {
-            $res = $this->model->returnAuthorsFromBook($id);
-            return $res;
-        }
-		
-		
-		public function getGenresBook($id)
-        {
-            $res = $this->model->returnGenresFromBook($id);
-            return $res;
-        }
+
 		
 		
     }

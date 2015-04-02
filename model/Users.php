@@ -44,5 +44,11 @@ class Users
         return $res;
     }
 
+    public function userSelectById($id)
+    {
+        $query = "SELECT * FROM user WHERE user.id= '$id'";
+        $res = $this->mysql->select($query);
+        return $res;
+    }
 
 }

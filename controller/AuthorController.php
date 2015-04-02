@@ -10,10 +10,29 @@
 		{
 			$this->model = new Authors();
 		}
+
         public function getAuthors()
         {
             $res = $this->model->authorsSelectAll();
             return $res;
         }
-		
+
+        public function addAuthors($data)
+        {
+            $res = $this->model->authorsAdd($data);
+            return $res;
+        }
+
+        public function updateAuthors($where, $data)
+        {
+            $res = $this->model->authorsUpdate($where, $data);
+            return $res;
+        }
+
+        public function deleteAuthors($where)
+        {
+            $res = $this->model->authorsDelete($where);
+            return $res;
+        }
+
 	}

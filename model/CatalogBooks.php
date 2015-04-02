@@ -44,16 +44,16 @@ class CatalogBooks
         return $res;
     }
 	
-	public function getBooksByGenre($name)
+	public function getBooksByGenre($id)
 		{
-            if(is_array($name))
+            if(is_array($id))
             {
                 $query = "SELECT * FROM catalogbooks
                 JOIN book2genre
                 ON book2genre.id_book = catalogbooks.id
                 JOIN genres
                 ON book2genre.id_genre = genres.id
-                WHERE genres = '". implode($name) ."'";
+                WHERE genres = '". implode($id) ."'";
             }
             else
             {
@@ -62,22 +62,22 @@ class CatalogBooks
                 ON book2genre.id_book = catalogbooks.id
                 JOIN genres
                 ON book2genre.id_genre = genres.id
-                WHERE genres = '$name'";
+                WHERE genres = '$id'";
             }
             $res = $this->mysql->select($query);
             return $res;
 		}
 
-    public function getBooksByAuthor($name)
+    public function getBooksByAuthor($id)
     {
-        if(is_array($name))
+        if(is_array($id))
         {
             $query = "SELECT * FROM catalogbooks
             JOIN book2autors
             ON book2author.id_book = catalogbooks.id
             JOIN authors
             ON book2authors.id_author = authors.id
-            WHERE authors = '" . implode($name) . "'";
+            WHERE authors = '" . implode($id) . "'";
         }
         else
         {
@@ -86,7 +86,7 @@ class CatalogBooks
             ON book2authors.id_book = catalogbooks.id
             JOIN authors
             ON book2authors.id_author = authors.id
-            WHERE authors = '$name'";
+            WHERE authors = '$id'";
         }
         $res = $this->mysql->select($query);
         return $res;
@@ -98,5 +98,6 @@ class CatalogBooks
         $res = $this->mysql->select($query);
         return $res;
     }
+
 
 }
