@@ -23,9 +23,9 @@
             return $res;
         }
 
-        public function deleteBook($where)
+        public function deleteBook($id)
         {
-            $res = $this->model->bookDelete($where);
+            $res = $this->model->bookDelete($id);
             return $res;
         }
 

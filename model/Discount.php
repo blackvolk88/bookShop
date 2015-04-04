@@ -19,8 +19,9 @@ class Discount
             return false;
     }
 
-    public function discountDelete($where)
+    public function discountDelete($id)
     {
+        $where = array('id' =>$id);
         $res = $this->mysql->delete('discount', $where);
         if($res)
             return true;

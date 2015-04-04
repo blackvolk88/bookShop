@@ -19,8 +19,9 @@ class CatalogBooks
             return false;
     }
 
-    public function bookDelete($where)
+    public function bookDelete($id)
     {
+        $where = array('id' =>$id);
         $res = $this->mysql->delete('catalogbooks', $where);
         if($res)
             return true;

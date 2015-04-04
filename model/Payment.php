@@ -19,8 +19,9 @@ class Payment
             return false;
     }
 
-    public function paymentsDelete($where)
+    public function paymentsDelete($id)
     {
+        $where = array('id' =>$id);
         $res = $this->mysql->delete('payment', $where);
         if($res)
             return true;

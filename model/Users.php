@@ -19,8 +19,9 @@ class Users
             return false;
     }
 
-    public function usersDelete($where)
+    public function usersDelete($id)
     {
+        $where = array('id' =>$id);
         $res = $this->mysql->delete('user', $where);
         if($res)
             return true;

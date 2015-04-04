@@ -19,8 +19,9 @@ class Basket
             return false;
     }
 
-    public function basketDelete($where)
+    public function basketDelete($id)
     {
+        $where = array('id' =>$id);
         $res = $this->mysql->delete('basket', $where);
         if($res)
             return true;

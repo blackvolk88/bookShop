@@ -19,8 +19,9 @@ class Authors
             return false;
     }
 
-    public function authorsDelete($where)
+    public function authorsDelete($id)
     {
+        $where = array('id' =>$id);
         $res = $this->mysql->delete('authors', $where);
         if($res)
             return true;

@@ -29,9 +29,9 @@
             return $res;
         }
 
-        public function deleteAuthors($where)
+        public function deleteAuthors($id)
         {
-            $res = $this->model->authorsDelete($where);
+            $res = $this->model->authorsDelete($id);
             return $res;
         }
 

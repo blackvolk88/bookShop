@@ -19,8 +19,9 @@ class Genres
             return false;
     }
 
-    public function genresDelete($where)
+    public function genresDelete($id)
     {
+        $where = array('id' =>$id);
         $res = $this->mysql->delete('genres', $where);
         if($res)
             return true;

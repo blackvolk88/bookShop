@@ -23,7 +23,7 @@ class OrderController {
         return $res;
     }
 
-    public function deleteBook($orderId)
+    public function deleteOrder($orderId)
     {
         $res = $this->model->orderDelete($orderId);
         return $res;
