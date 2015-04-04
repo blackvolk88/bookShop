@@ -37,7 +37,7 @@
 		
 		public function getBookById($id)
         {
-            $res = $this->model->returnBook($id);
+            $res = $this->model->getBookById($id);
             return $res;
         }       
 		
