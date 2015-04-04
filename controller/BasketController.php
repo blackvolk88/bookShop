@@ -17,33 +17,33 @@ class BasketController {
         return $res;
     }
 
-    public function updateOrder($id, $statusName)
+    public function updateBasket($id, $count)
     {
-        $res = $this->model->orderUpdate($id, $statusName);
+        $res = $this->model->basketUpdate($id, $count);
         return $res;
     }
 
-    public function deleteBook($orderId)
+    public function deleteBasket($id)
     {
-        $res = $this->model->orderDelete($orderId);
+        $res = $this->model->basketDelete($id);
         return $res;
     }
 
-    public function getOrders()
+    public function getBasket()
     {
-        $res = $this->model->ordersSelectAll();
+        $res = $this->model->basketSelectAll();
         return $res;
     }
 
-    public function getOrderById($id)
+    public function getBasketById($id)
     {
-        $res = $this->model->getOrderById($id);
+        $res = $this->model->getBasketById($id);
         return $res;
     }
 
-    public function getOrderByUserId($id)
+    public function getBasketByUserId($id)
     {
-        $res = $this->model->getOrderByUserId($id);
+        $res = $this->model->getBasketByUserId($id);
         return $res;
     }
 
