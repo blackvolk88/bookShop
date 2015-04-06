@@ -2,7 +2,7 @@
 	require_once (dirname(__FILE__).'/../model/Users.php');
     require_once (dirname(__FILE__).'/../model/Discount.php');
 	
-    class userController  {
+    class UsersController  {
         
 		private $model;
         private $discount;
