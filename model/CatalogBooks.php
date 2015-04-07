@@ -12,7 +12,7 @@ class CatalogBooks
 
     public function bookAdd($data)
     {
-        $res = $this->mysql->insert('catalogbooks', $data);
+        $res = $this->mysql->insert('books', $data);
         if($res)
             return true;
         else
@@ -22,7 +22,7 @@ class CatalogBooks
     public function bookDelete($id)
     {
         $where = array('id' =>$id);
-        $res = $this->mysql->delete('catalogbooks', $where);
+        $res = $this->mysql->delete('books', $where);
         if($res)
             return true;
         else
@@ -32,7 +32,7 @@ class CatalogBooks
     public function bookUpdate($dataBook, $id)
     {
         $where = array('id' => $id);
-        $res = $this->mysql->update('catalogbooks', $where, $dataBook);
+        $res = $this->mysql->update('books', $where, $dataBook);
         if($res)
             return true;
         else
@@ -41,7 +41,7 @@ class CatalogBooks
 
     public function bookSelectAll()
     {
-        $query = "SELECT * FROM catalogbooks";
+        $query = "SELECT * FROM books";
         $res = $this->mysql->select($query);
         return $res;
     }
@@ -50,20 +50,20 @@ class CatalogBooks
 		{
             if(is_array($id))
             {
-                $query = "SELECT * FROM catalogbooks
-                JOIN book2genre
-                ON book2genre.id_book = catalogbooks.id
+                $query = "SELECT * FROM books
+                JOIN bookToGenre
+                ON bookToGenre.BookID = books.id
                 JOIN genres
-                ON book2genre.id_genre = genres.id
+                ON bookToGenre.GenreID = genres.id
                 WHERE genres = '". implode($id) ."'";
             }
             else
             {
-                $query = "SELECT * FROM catalogbooks
-                JOIN book2genre
-                ON book2genre.id_book = catalogbooks.id
+                $query = "SELECT * FROM books
+                JOIN bookToGenre
+                ON bookToGenre.BookID = books.id
                 JOIN genres
-                ON book2genre.id_genre = genres.id
+                ON bookToGenre.GenreID = genres.id
                 WHERE genres = '$id'";
             }
             $res = $this->mysql->select($query);
@@ -74,20 +74,20 @@ class CatalogBooks
     {
         if(is_array($id))
         {
-            $query = "SELECT * FROM catalogbooks
-            JOIN book2autors
-            ON book2author.id_book = catalogbooks.id
+            $query = "SELECT * FROM books
+            JOIN bookToAuthor
+            ON bookToAuthor.BookID = books.id
             JOIN authors
-            ON book2authors.id_author = authors.id
+            ON bookToAuthor.AuthorID = authors.id
             WHERE authors = '" . implode($id) . "'";
         }
         else
         {
-            $query = "SELECT * FROM catalogbooks
-            JOIN book2autors
-            ON book2authors.id_book = catalogbooks.id
+            $query = "SELECT * FROM books
+            JOIN bookToAuthor
+            ON bookToAuthor.BookID = books.id
             JOIN authors
-            ON book2authors.id_author = authors.id
+            ON bookToAuthor.AuthorID = authors.id
             WHERE authors = '$id'";
         }
         $res = $this->mysql->select($query);
@@ -96,7 +96,7 @@ class CatalogBooks
 
     public function getBookById($id)
     {
-        $query = "SELECT * FROM catalogbooks WHERE id = '$id'";
+        $query = "SELECT * FROM books WHERE id = '$id'";
         $res = $this->mysql->select($query);
         return $res;
     }

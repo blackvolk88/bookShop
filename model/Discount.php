@@ -12,7 +12,7 @@ class Discount
 
     public function discountAdd($data)
     {
-        $res = $this->mysql->insert('discount', $data);
+        $res = $this->mysql->insert('discounts', $data);
         if($res)
             return true;
         else
@@ -22,7 +22,7 @@ class Discount
     public function discountDelete($id)
     {
         $where = array('id' =>$id);
-        $res = $this->mysql->delete('discount', $where);
+        $res = $this->mysql->delete('discounts', $where);
         if($res)
             return true;
         else
@@ -31,9 +31,9 @@ class Discount
 
     public function discountUpdate($id, $discSize)
     {
-        $data = array('discount_size' => $discSize);
+        $data = array('Percent' => $discSize);
         $where = array('id' => $id);
-        $res = $this->mysql->update('discount', $where, $data);
+        $res = $this->mysql->update('discounts', $where, $data);
         if($res)
             return true;
         else
@@ -42,16 +42,16 @@ class Discount
 
     public function discountSelectAll()
     {
-        $query = "SELECT * FROM discount";
+        $query = "SELECT * FROM discounts";
         $res = $this->mysql->select($query);
         return $res;
     }
 
     public function discountAddUser($idDiscount, $idUser)
     {
-        $data = array('discount_id' => $idDiscount);
+        $data = array('DiscountID' => $idDiscount);
         $where = array('id' => $idUser);
-        $res = $this->mysql->update('user', $where, $data);
+        $res = $this->mysql->update('users', $where, $data);
         return $res;
     }
 

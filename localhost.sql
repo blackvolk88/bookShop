@@ -1,295 +1,275 @@
 -- phpMyAdmin SQL Dump
--- version 4.2.9
+-- version 4.2.6deb1
 -- http://www.phpmyadmin.net
 --
--- Хост: localhost
--- Время создания: Фев 17 2015 г., 14:33
--- Версия сервера: 5.6.20
--- Версия PHP: 5.3.29
+-- Host: localhost
+-- Generation Time: Apr 07, 2015 at 07:59 PM
+-- Server version: 5.5.41-0ubuntu0.14.10.1
+-- PHP Version: 5.5.12-2ubuntu4.3
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-SET time_zone = "+02:00";
+SET time_zone = "+00:00";
 
 
---
--- База данных: `BOOKSHOP`
---
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8 */;
 
-
 --
--- Таблица `AUTHORS`
+-- Database: `bookShop`
 --
-
-CREATE TABLE IF NOT EXISTS `AUTHORS` (
-`id_author` int(11) NOT NULL,
-  `author` varchar(250) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=cp1251;
-
 
+-- --------------------------------------------------------
 
 --
--- Таблица `BASKET`
+-- Table structure for table `authors`
 --
 
-CREATE TABLE IF NOT EXISTS `BASKET` (
-`id` int(11) NOT NULL,
-  `book_id` int(11) NOT NULL,
-  `user_id` int(11) NOT NULL,
-  `count` int(11) NOT NULL,
-  `price` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=cp1251;
+CREATE TABLE IF NOT EXISTS `authors` (
+`ID` int(11) unsigned NOT NULL,
+  `FullName` varchar(255) NOT NULL DEFAULT 'John Doe'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
+-- --------------------------------------------------------
 
-
 --
--- Таблица`BOOKAUTHORS`
+-- Table structure for table `books`
 --
 
-CREATE TABLE IF NOT EXISTS `BOOK2AUTHORS` (
-`id` int(11) NOT NULL,
-  `id_book` int(11) NOT NULL,
-  `id_author` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=cp1251;
+CREATE TABLE IF NOT EXISTS `books` (
+`ID` int(11) unsigned NOT NULL,
+  `Name` varchar(255) CHARACTER SET utf8 NOT NULL,
+  `Description` text,
+  `ImagePath` varchar(255) CHARACTER SET utf8 DEFAULT NULL,
+  `Price` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
+-- --------------------------------------------------------
 
-
 --
--- Таблица `BOOKGENRE`
+-- Table structure for table `bookToAuthor`
 --
-
-CREATE TABLE IF NOT EXISTS `BOOK2GENRE` (
-`id` int(11) NOT NULL,
-  `id_ganre` int(11) NOT NULL,
-  `id_book` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=cp1251;
 
+CREATE TABLE IF NOT EXISTS `bookToAuthor` (
+  `BookID` int(11) unsigned NOT NULL,
+  `AuthorID` int(11) unsigned NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+-- --------------------------------------------------------
 
 --
--- Таблица `GENRES`
+-- Table structure for table `bookToGenre`
 --
 
-CREATE TABLE IF NOT EXISTS `GENRES` (
-`genres_id` int(11) NOT NULL,
-  `genres` varchar(250) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=cp1251;
+CREATE TABLE IF NOT EXISTS `bookToGenre` (
+  `BookID` int(11) unsigned NOT NULL,
+  `GenreID` int(11) unsigned NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+-- --------------------------------------------------------
 
 --
--- Таблица `CATALOGBOOKS`
+-- Table structure for table `discounts`
 --
 
-CREATE TABLE IF NOT EXISTS `CATALOGBOOKS` (
-`id_book` int(11) NOT NULL,
-  `title_book` varchar(250) NOT NULL,
-  `short_description` varchar(300) NOT NULL,
-  `content` text NOT NULL,
-  `price` int(5) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=cp1251;
+CREATE TABLE IF NOT EXISTS `discounts` (
+`ID` int(11) unsigned NOT NULL,
+  `Percent` int(2) unsigned NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
+-- --------------------------------------------------------
 
-
 --
--- Таблица `ORDERITEMS`
+-- Table structure for table `genres`
 --
 
-CREATE TABLE IF NOT EXISTS `ORDERITEMS` (
-  `order_id` int(11) NOT NULL,
-  `book_id` int(11) NOT NULL,
-  `count` int(11) NOT NULL,
-  `price` int(11) NOT NULL,
-) ENGINE=InnoDB DEFAULT CHARSET=cp1251;
+CREATE TABLE IF NOT EXISTS `genres` (
+`ID` int(11) unsigned NOT NULL,
+  `Name` varchar(255) CHARACTER SET utf8 NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
+-- --------------------------------------------------------
 
-
 --
--- Таблица `ORDERS`
+-- Table structure for table `orderItems`
 --
-
-CREATE TABLE IF NOT EXISTS `ORDERS` (
-`order_id` int(11) NOT NULL,
-  `user_id` int(11) NOT NULL,
-  `payment_id` int(11) NOT NULL,
-  `date` DATETIME DEFAULT CURRENT_TIMESTAMP,
-  `status_name` varchar(150) NOT NULL,
-  `order_sum` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=cp1251;
 
+CREATE TABLE IF NOT EXISTS `orderItems` (
+  `OrderID` int(11) unsigned NOT NULL,
+  `ProductID` int(11) unsigned NOT NULL,
+  `Count` int(11) unsigned NOT NULL DEFAULT '1',
+  `Price` int(11) unsigned NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+-- --------------------------------------------------------
 
 --
--- Таблица `PAYMENT`
+-- Table structure for table `orders`
 --
 
-CREATE TABLE IF NOT EXISTS `PAYMENT` (
-`payment_id` int(11) NOT NULL,
-  `payment_name` varchar(150) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=cp1251;
+CREATE TABLE IF NOT EXISTS `orders` (
+`ID` int(11) unsigned NOT NULL,
+  `UserID` int(11) unsigned NOT NULL,
+  `CreationDate` datetime NOT NULL,
+  `RenewalDate` datetime DEFAULT NULL,
+  `Status` enum('PENDING','CREATED','COMPLITED','DECLINED') CHARACTER SET utf8 NOT NULL DEFAULT 'PENDING',
+  `PaymentID` int(11) unsigned NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
+-- --------------------------------------------------------
 
-
 --
--- Таблица `STATUSORDER`
+-- Table structure for table `paymentMethods`
 --
 
-CREATE TABLE IF NOT EXISTS `STATUSORDER` (
-`status_id` int(11) NOT NULL,
-  `status_name` varchar(150) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=cp1251;
+CREATE TABLE IF NOT EXISTS `paymentMethods` (
+`ID` int(11) unsigned NOT NULL,
+  `Name` varchar(255) CHARACTER SET utf8 NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
+-- --------------------------------------------------------
 
-
 --
--- Таблица `USER`
+-- Table structure for table `shoppingCart`
 --
 
-CREATE TABLE IF NOT EXISTS `USER` (
-`user_id` int(11) NOT NULL,
-  `login` varchar(150) NOT NULL,
-  `email` varchar(150) NOT NULL,
-  `password` varchar(100) NOT NULL,
-  `discount_id` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=cp1251;
+CREATE TABLE IF NOT EXISTS `shoppingCart` (
+`ID` int(11) unsigned NOT NULL,
+  `UserID` int(11) unsigned NOT NULL,
+  `BookID` int(11) unsigned NOT NULL,
+  `Count` int(11) unsigned NOT NULL,
+  `Price` int(11) unsigned NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
+-- --------------------------------------------------------
 
 --
--- Таблица `DISCOUNT`
+-- Table structure for table `users`
 --
-
-CREATE TABLE IF NOT EXISTS `DISCOUNT` (
-	`discount_id` int(11) NOT NULL,
-	`discount_size` int(5) NOT NULL	
-) ENGINE=InnoDB DEFAULT CHARSET=cp1251;
 
+CREATE TABLE IF NOT EXISTS `users` (
+`ID` int(11) unsigned NOT NULL,
+  `Email` varchar(255) CHARACTER SET utf8 NOT NULL,
+  `FullName` varchar(255) CHARACTER SET utf8 DEFAULT NULL,
+  `Password` varchar(255) CHARACTER SET utf16 NOT NULL,
+  `DiscountID` int(11) unsigned NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
 --
--- Индексы таблицы `AUTHORS`
+-- Indexes for dumped tables
 --
-ALTER TABLE `AUTHORS`
- ADD PRIMARY KEY (`id_author`);
 
 --
--- Индексы таблицы `BASKET`
+-- Indexes for table `authors`
 --
-ALTER TABLE `BASKET`
- ADD PRIMARY KEY (`id`);
+ALTER TABLE `authors`
+ ADD PRIMARY KEY (`ID`), ADD UNIQUE KEY `FullName` (`FullName`);
 
 --
--- Индексы таблицы `BOOKAUTHORS`
+-- Indexes for table `books`
 --
-ALTER TABLE `BOOKAUTHORS`
- ADD PRIMARY KEY (`id`);
+ALTER TABLE `books`
+ ADD PRIMARY KEY (`ID`), ADD KEY `Name` (`Name`);
 
 --
--- Индексы таблицы `BOOKGENRE`
+-- Indexes for table `bookToAuthor`
 --
-ALTER TABLE `BOOKGENRE`
- ADD PRIMARY KEY (`id`);
+ALTER TABLE `bookToAuthor`
+ ADD PRIMARY KEY (`BookID`,`AuthorID`);
 
 --
--- Индексы таблицы `GENRES`
+-- Indexes for table `bookToGenre`
 --
-ALTER TABLE `GENRES`
- ADD PRIMARY KEY (`genres_id`);
+ALTER TABLE `bookToGenre`
+ ADD PRIMARY KEY (`BookID`,`GenreID`);
 
 --
--- Индексы таблицы `KATALOGBOOKS`
+-- Indexes for table `discounts`
 --
-ALTER TABLE `CATALOGBOOKS`
- ADD PRIMARY KEY (`id_book`);
+ALTER TABLE `discounts`
+ ADD PRIMARY KEY (`ID`);
 
 --
--- Индексы таблицы `ORDERS`
+-- Indexes for table `genres`
 --
-ALTER TABLE `ORDERS`
- ADD PRIMARY KEY (`order_id`);
+ALTER TABLE `genres`
+ ADD PRIMARY KEY (`ID`), ADD UNIQUE KEY `Name` (`Name`);
 
 --
--- Индексы таблицы `PAYMENT`
+-- Indexes for table `orderItems`
 --
-ALTER TABLE `PAYMENT`
- ADD PRIMARY KEY (`payment_id`);
+ALTER TABLE `orderItems`
+ ADD PRIMARY KEY (`OrderID`,`ProductID`);
 
 --
--- Индексы таблицы `STATUSORDER`
+-- Indexes for table `orders`
 --
-ALTER TABLE `STATUSORDER`
- ADD PRIMARY KEY (`status_id`);
+ALTER TABLE `orders`
+ ADD PRIMARY KEY (`ID`);
 
 --
--- Индексы таблицы `USER`
+-- Indexes for table `paymentMethods`
 --
-ALTER TABLE `USER`
- ADD PRIMARY KEY (`user_id`);
+ALTER TABLE `paymentMethods`
+ ADD PRIMARY KEY (`ID`), ADD UNIQUE KEY `Name` (`Name`);
 
 --
--- Индексы таблицы `DISCOUNT`
+-- Indexes for table `shoppingCart`
 --
-ALTER TABLE `DISCOUNT`
- ADD PRIMARY KEY (`discount_id`);
- 
---
--- AUTO_INCREMENT таблицы `AUTHORS`
---
-ALTER TABLE `AUTHORS`
-MODIFY `id_author` int(11) NOT NULL AUTO_INCREMENT;
+ALTER TABLE `shoppingCart`
+ ADD PRIMARY KEY (`ID`), ADD UNIQUE KEY `UserID` (`UserID`,`BookID`);
 
 --
--- AUTO_INCREMENT таблицы `BASKET`
+-- Indexes for table `users`
 --
-ALTER TABLE `BASKET`
-MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+ALTER TABLE `users`
+ ADD PRIMARY KEY (`ID`), ADD UNIQUE KEY `Email` (`Email`);
 
 --
--- AUTO_INCREMENT таблицы `BOOKAUTHORS`
+-- AUTO_INCREMENT for dumped tables
 --
-ALTER TABLE `BOOKAUTHORS`
-MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT таблицы `BOOKGENRE`
+-- AUTO_INCREMENT for table `authors`
 --
-ALTER TABLE `BOOKGENRE`
-MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
-
+ALTER TABLE `authors`
+MODIFY `ID` int(11) unsigned NOT NULL AUTO_INCREMENT;
 --
--- AUTO_INCREMENT таблицы `GENRES`
+-- AUTO_INCREMENT for table `books`
 --
-ALTER TABLE `GENRES`
-MODIFY `genres_id` int(11) NOT NULL AUTO_INCREMENT;
-
+ALTER TABLE `books`
+MODIFY `ID` int(11) unsigned NOT NULL AUTO_INCREMENT;
 --
--- AUTO_INCREMENT таблицы `KATALOGBOOKS`
+-- AUTO_INCREMENT for table `discounts`
 --
-ALTER TABLE `KATALOGBOOKS`
-MODIFY `id_book` int(11) NOT NULL AUTO_INCREMENT;
-
+ALTER TABLE `discounts`
+MODIFY `ID` int(11) unsigned NOT NULL AUTO_INCREMENT;
 --
--- AUTO_INCREMENT таблицы `ORDERS`
+-- AUTO_INCREMENT for table `genres`
 --
-ALTER TABLE `ORDERS`
-MODIFY `order_id` int(11) NOT NULL AUTO_INCREMENT;
-
+ALTER TABLE `genres`
+MODIFY `ID` int(11) unsigned NOT NULL AUTO_INCREMENT;
 --
--- AUTO_INCREMENT таблицы `PAYMENT`
+-- AUTO_INCREMENT for table `orders`
 --
-ALTER TABLE `PAYMENT`
-MODIFY `payment_id` int(11) NOT NULL AUTO_INCREMENT;
-
+ALTER TABLE `orders`
+MODIFY `ID` int(11) unsigned NOT NULL AUTO_INCREMENT;
 --
--- AUTO_INCREMENT таблицы `STATUSORDER`
+-- AUTO_INCREMENT for table `paymentMethods`
 --
-ALTER TABLE `STATUSORDER`
-MODIFY `status_id` int(11) NOT NULL AUTO_INCREMENT;
-
+ALTER TABLE `paymentMethods`
+MODIFY `ID` int(11) unsigned NOT NULL AUTO_INCREMENT;
 --
--- AUTO_INCREMENT таблицы `USER`
+-- AUTO_INCREMENT for table `shoppingCart`
 --
-ALTER TABLE `USER`
-MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT;
-
+ALTER TABLE `shoppingCart`
+MODIFY `ID` int(11) unsigned NOT NULL AUTO_INCREMENT;
 --
--- AUTO_INCREMENT таблицы `DISCOUNT`
+-- AUTO_INCREMENT for table `users`
 --
-ALTER TABLE `DISCOUNT`
-MODIFY `discount_id` int(11) NOT NULL AUTO_INCREMENT;
+ALTER TABLE `users`
+MODIFY `ID` int(11) unsigned NOT NULL AUTO_INCREMENT;
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

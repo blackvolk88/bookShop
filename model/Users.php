@@ -12,7 +12,7 @@ class Users
 
     public function usersAdd($data)
     {
-        $res = $this->mysql->insert('user', $data);
+        $res = $this->mysql->insert('users', $data);
         if($res)
             return true;
         else
@@ -22,7 +22,7 @@ class Users
     public function usersDelete($id)
     {
         $where = array('id' =>$id);
-        $res = $this->mysql->delete('user', $where);
+        $res = $this->mysql->delete('users', $where);
         if($res)
             return true;
         else
@@ -32,7 +32,7 @@ class Users
     public function usersUpdate($id, $dataUser)
     {
         $where = array('id' => $id);
-        $res = $this->mysql->update('user', $where, $dataUser);
+        $res = $this->mysql->update('users', $where, $dataUser);
         if($res)
             return true;
         else
@@ -41,14 +41,14 @@ class Users
 
     public function usersSelectAll()
     {
-        $query = "SELECT * FROM user";
+        $query = "SELECT * FROM users";
         $res = $this->mysql->select($query);
         return $res;
     }
 
     public function userSelectById($id)
     {
-        $query = "SELECT * FROM user WHERE user.id= '$id'";
+        $query = "SELECT * FROM users WHERE users.id= '$id'";
         $res = $this->mysql->select($query);
         return $res;
     }

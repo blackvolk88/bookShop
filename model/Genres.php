@@ -31,7 +31,7 @@ class Genres
 
     public function genresUpdate($id, $genreName)
     {
-        $data = array('genres' => $genreName);
+        $data = array('Name' => $genreName);
         $where = array('id' => $id);
         $res = $this->mysql->update('genres', $where, $data);
         if($res)

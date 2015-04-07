@@ -12,7 +12,7 @@ class Basket
 
     public function basketAdd($data)
     {
-        $res = $this->mysql->insert('basket', $data);
+        $res = $this->mysql->insert('shoppingCart', $data);
         if($res)
             return true;
         else
@@ -22,7 +22,7 @@ class Basket
     public function basketDelete($id)
     {
         $where = array('id' =>$id);
-        $res = $this->mysql->delete('basket', $where);
+        $res = $this->mysql->delete('shoppingCart', $where);
         if($res)
             return true;
         else
@@ -33,7 +33,7 @@ class Basket
     {
         $data = array('count' => $count);
         $where = array('id' => $id);
-        $res = $this->mysql->update('basket', $where, $data);
+        $res = $this->mysql->update('shoppingCart', $where, $data);
         if($res)
             return true;
         else
@@ -42,7 +42,7 @@ class Basket
 
     public function basketSelectAll()
     {
-        $query = "SELECT * FROM basket";
+        $query = "SELECT * FROM shoppingCart";
         $res = $this->mysql->select($query);
         return $res;
     }
@@ -50,14 +50,14 @@ class Basket
 
     public function getBasketById($id)
     {
-        $query = "SELECT * FROM basket WHERE id = '$id'";
+        $query = "SELECT * FROM shoppingCart WHERE id = '$id'";
         $res = $this->mysql->select($query);
         return $res;
     }
 
     public function getBasketByUserId($id)
     {
-        $query = "SELECT * FROM basket WHERE user_id='$id'";
+        $query = "SELECT * FROM shoppingCart WHERE UserID='$id'";
         $res = $this->mysql->select($query);
         return $res;
     }

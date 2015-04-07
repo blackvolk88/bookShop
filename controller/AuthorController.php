@@ -1,8 +1,9 @@
 <?php
 
-    require_once (dirname(__FILE__).'/../model/Authors.php');
+require_once (dirname(__FILE__).'/../model/Authors.php');
+require_once (dirname(__FILE__).'controller.php');
 	
-    class AuthorController  {
+    class AuthorController  extends controller{
         
 		private $model;
 		
@@ -35,4 +36,15 @@
             return $res;
         }
 
+        protected function getData(){
+            parent::getData();
+        }
+
+        protected function setData(){
+            parent::setData();
+        }
+
+        public function request(){
+            parent::request();
+        }
 	}

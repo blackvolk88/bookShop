@@ -31,7 +31,7 @@ class Authors
 
     public function authorsUpdate($id, $authorName)
     {
-        $data = array('authors' => $authorName);
+        $data = array('FullName' => $authorName);
         $where = array('id' => $id);
         $res = $this->mysql->update('authors', $where, $data);
         if($res)

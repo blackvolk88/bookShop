@@ -13,7 +13,7 @@ class Orders
     public function orderAdd($dataOrders, $dataOrdersItems)
     {
         $resOrd = $this->mysql->insert('orders', $dataOrders);
-        $resOrdI = $this->mysql->insert('orderitems', $dataOrdersItems);
+        $resOrdI = $this->mysql->insert('orderItems', $dataOrdersItems);
         if($resOrd && $resOrdI)
             return true;
         else
@@ -23,9 +23,9 @@ class Orders
     public function orderDelete($orderId)
     {
         $whereOrd = array('id' => $orderId);
-        $whereOrdI = array('order_id' => $orderId);
+        $whereOrdI = array('OrderID' => $orderId);
         $resOrd = $this->mysql->delete('orders', $whereOrd);
-        $resOrdId = $this->mysql->delete('orderitems', $whereOrdI);
+        $resOrdId = $this->mysql->delete('orderItems', $whereOrdI);
         if($resOrd && $resOrdId)
             return true;
         else
@@ -35,7 +35,7 @@ class Orders
     public function orderUpdate($statusName, $id)
     {
         $where = array('id' => $id);
-        $data = array('status_name' => $statusName);
+        $data = array('Status' => $statusName);
         $res = $this->mysql->update('orders', $where, $data);
         if($res)
             return true;
@@ -59,13 +59,13 @@ class Orders
 
     public function getOrderByUserId($userId)
     {
-        $query = "SELECT * FROM orders WHERE user_id='$userId'";
+        $query = "SELECT * FROM orders WHERE UserID='$userId'";
         $res = $this->mysql->select($query);
         foreach($res as $key=>&$val)
         {
-            $query="SELECT * FROM orderitems WHERE order_id='{$val['order_id']}'";
+            $query="SELECT * FROM orderitems WHERE OrderID='{$val['OrderID']}'";
             $result = $this->mysql->select($query);
-            $val['orderId'] = $result;
+            $val['OrderID'] = $result;
         }
         return $res;
     }

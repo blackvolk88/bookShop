@@ -12,7 +12,7 @@ class Payment
 
     public function paymentsAdd($data)
     {
-        $res = $this->mysql->insert('payment', $data);
+        $res = $this->mysql->insert('paymentMethods', $data);
         if($res)
             return true;
         else
@@ -22,7 +22,7 @@ class Payment
     public function paymentsDelete($id)
     {
         $where = array('id' =>$id);
-        $res = $this->mysql->delete('payment', $where);
+        $res = $this->mysql->delete('paymentMethods', $where);
         if($res)
             return true;
         else
@@ -31,9 +31,9 @@ class Payment
 
     public function paymentsUpdate($id, $payName)
     {
-        $data = array('payment_name' => $payName);
+        $data = array('Name' => $payName);
         $where = array('id' => $id);
-        $res = $this->mysql->update('payment', $where, $data);
+        $res = $this->mysql->update('paymentMethods', $where, $data);
         if($res)
             return true;
         else
@@ -42,7 +42,7 @@ class Payment
 
     public function paymentsSelectAll()
     {
-        $query = "SELECT * FROM payment";
+        $query = "SELECT * FROM paymentMethods";
         $res = $this->mysql->select($query);
         return $res;
     }
