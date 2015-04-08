@@ -1,7 +1,7 @@
 <?php
 /*error_reporting(-1) ; // включить все виды ошибок, включая  E_STRICT
 ini_set('display_errors', 'On');  // вывести на экран помимо логов*/
-
+error_reporting(0) ;
 include_once 'controller/mainPageController.php';
 
 /*if(isset($_POST['Login_Submit']))
