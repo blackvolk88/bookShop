@@ -27,7 +27,8 @@ class mainPageController extends controller{
         $internalGenreContent = '';
         $internalBookContent = '';
         foreach($authors as $val){
-            $internalAuthorContent .= $this->view->renderInternalContent('author_list',
+            $internalAuthorContent .= $this->view->renderInternalContent(
+                'author_list',
                 array(
                     '<%AUTHOR_LINK%>' => 'index.php?sort=Author&ID=' . $val['ID'],
                     '<%AUTHOR_NAME%>' => $val['FullName']
@@ -35,7 +36,8 @@ class mainPageController extends controller{
             ;
         }
         foreach($genres as $val){
-            $internalGenreContent .= $this->view->renderInternalContent('genres_list',
+            $internalGenreContent .= $this->view->renderInternalContent(
+                'genres_list',
                 array(
                     '<%GENRE_LINK%>' => 'index.php?sort=Genre&ID=' . $val['ID'],
                     '<%GENRE_NAME%>' => $val['Name']
@@ -43,7 +45,8 @@ class mainPageController extends controller{
             ;
         }
         foreach($books as $val){
-            $internalBookContent .= $this->view->renderInternalContent('book_short',
+            $internalBookContent .= $this->view->renderInternalContent(
+                'book_short',
                 array(
                     '<%BOOKNAME%>' => $val['Name'],
                     '<%BOOKDESCRIPTION%>' => $val['Description'],

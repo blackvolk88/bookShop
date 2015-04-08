@@ -9,11 +9,11 @@ include_once 'controller/mainPageController.php';
     $user = $Users->Login($_POST['Login'], $_POST['Password']);
     if(!empty($user))
         header("Location: index.php");
-}
+}*/
 
 switch($_GET['action'])
 {
-    /*case 'Registration':
+    case 'Registration':
         $controller = new UsersController();
         break;
     case 'Login':
@@ -27,12 +27,9 @@ switch($_GET['action'])
         break;
     case 'Checkout':
         $controller = new UsersController();
-        break;*/
-/*    default:
+        break;
+    default:
         $controller = new mainPageController();
-        var_dump('asd');exit;
-
-}*/
-$controller = new mainPageController();
+}
 $controller->Request();
 ?>
