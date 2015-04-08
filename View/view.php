@@ -5,7 +5,7 @@ class view {
     protected $placeHolders;
 
     public function __construct($template){
-        $this->content = file_get_contents('../templates/' . $template . '.html');
+        $this->content = file_get_contents('templates/' . $template . '.html');
     }
 
     public function setReplacement($data){
@@ -21,7 +21,7 @@ class view {
     }
 
     public function renderInternalContent($template, $dataToReplace){
-        $content = file_get_contents($template);
+        $content = file_get_contents('templates/' . $template . '.html');
         $search = array_keys($dataToReplace);
         $replace = $dataToReplace;
         return str_replace($search, $replace, $content);

@@ -1,8 +1,12 @@
 <?php
 
-class controller {
-    public function __construct(){
+include_once 'View/view.php';
 
+class controller {
+    protected $view;
+    protected $placeHolders;
+    public function __construct($template){
+        $this->view = new view($template);
     }
 
     protected function getData(){
@@ -10,11 +14,12 @@ class controller {
     }
 
     protected function setData(){
-
+        $this->view->setReplacement($this->placeHolders);
     }
 
-    protected function request(){
+    public function request(){
         $this->getData();
         $this->setData();
+        $this->view->render();
     }
 }

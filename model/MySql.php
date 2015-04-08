@@ -1,5 +1,7 @@
 <?php
 
+include_once 'config.php';
+
 class MySql
 {
     private static $instance = null;
