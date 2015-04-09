@@ -3,6 +3,8 @@
 ini_set('display_errors', 'On');  // вывести на экран помимо логов*/
 error_reporting(0) ;
 include_once 'controller/mainPageController.php';
+include_once 'controller/bookPageController.php';
+include_once 'controller/shoppingCartController.php';
 
 /*if(isset($_POST['Login_Submit']))
 {
@@ -19,11 +21,11 @@ switch($_GET['action'])
     case 'Login':
         $controller = new UsersController();
         break;
-    case 'Discription':
-        $controller = new BookController();
+    case 'description':
+        $controller = new bookPageController();
         break;
-    case 'AddBasket':
-        $controller = new UsersController();
+    case 'shoppingcart':
+        $controller = new shoppingCartController();
         break;
     case 'Checkout':
         $controller = new UsersController();

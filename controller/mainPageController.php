@@ -50,7 +50,8 @@ class mainPageController extends controller{
                 array(
                     '<%BOOKNAME%>' => $val['Name'],
                     '<%BOOKDESCRIPTION%>' => $val['Description'],
-                    '<%BOOKPRICE%>' => $val['Price']
+                    '<%BOOKPRICE%>' => $val['Price'],
+                    '<%BOOKID%>' => $val['ID']
                 ))
             ;
         }

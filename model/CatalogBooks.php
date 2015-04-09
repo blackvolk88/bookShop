@@ -55,7 +55,7 @@ class CatalogBooks
                 ON bookToGenre.BookID = books.id
                 JOIN genres
                 ON bookToGenre.GenreID = genres.id
-                WHERE genres = '". implode($id) ."'";
+                WHERE genres.id = '" . implode($id) . "'";
             }
             else
             {
@@ -64,7 +64,7 @@ class CatalogBooks
                 ON bookToGenre.BookID = books.id
                 JOIN genres
                 ON bookToGenre.GenreID = genres.id
-                WHERE genres = '$id'";
+                WHERE genres.id = '$id'";
             }
             $res = $this->mysql->select($query);
             return $res;
@@ -79,7 +79,7 @@ class CatalogBooks
             ON bookToAuthor.BookID = books.id
             JOIN authors
             ON bookToAuthor.AuthorID = authors.id
-            WHERE authors = '" . implode($id) . "'";
+            WHERE authors.id = '" . implode($id) . "'";
         }
         else
         {
@@ -88,7 +88,7 @@ class CatalogBooks
             ON bookToAuthor.BookID = books.id
             JOIN authors
             ON bookToAuthor.AuthorID = authors.id
-            WHERE authors = '$id'";
+            WHERE authors.id = '$id'";
         }
         $res = $this->mysql->select($query);
         return $res;
@@ -96,9 +96,16 @@ class CatalogBooks
 
     public function getBookById($id)
     {
-        $query = "SELECT * FROM books WHERE id = '$id'";
-        $res = $this->mysql->select($query);
-        return $res;
+        $query = "SELECT b.*, GROUP_CONCAT(a.FullName) as Authors, GROUP_CONCAT(g.Name) as Genres
+                    FROM books as b, authors as a, genres as g, bookToGenre as bg, bookToAuthor as ba
+                    WHERE
+                    a.ID = ba.AuthorID AND ba.BookID = b.ID
+                    AND
+                    g.ID = bg.GenreID AND bg.BookID = b.ID
+                    AND
+                    b.ID = $id;";
+        $result = $this->mysql->select($query);
+        return $result;
     }
 
 

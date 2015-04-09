@@ -47,5 +47,25 @@ class Authors
         return $res;
     }
 
+    public function getAuthorByBook($id)
+    {
+        if (is_array($id)) {
+            $query = "SELECT * FROM authors
+            JOIN bookToAuthor
+            ON bookToAuthor.AuthorID = authors.id
+            JOIN books
+            ON bookToAuthor.BookID = books.id
+            WHERE books.id = '" . implode($id) . "'";
+        } else {
+            $query = "SELECT * FROM authors
+            JOIN bookToAuthor
+            ON bookToAuthor.AuthorID = authors.id
+            JOIN books
+            ON bookToAuthor.BookID = books.id
+            WHERE books.id = '$id'";
+        }
+        $res = $this->mysql->select($query);
+        return $res;
+    }
 
 }

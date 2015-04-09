@@ -47,5 +47,24 @@ class Genres
         return $res;
     }
 
-
+    public function getGenreByBook($id)
+    {
+        if (is_array($id)) {
+            $query = "SELECT * FROM genres
+            JOIN bookToGenre
+            ON bookToGenre.GenreID = genres.id
+            JOIN books
+            ON bookToGenre.BookID = books.id
+            WHERE books.id = '" . implode($id) . "'";
+        } else {
+            $query = "SELECT * FROM genres
+            JOIN bookToGenre
+            ON bookToGenre.GenreID = genres.id
+            JOIN books
+            ON bookToGenre.BookID = books.id
+            WHERE books.id = '" . implode($id) . "'";
+        }
+        $res = $this->mysql->select($query);
+        return $res;
+    }
 }

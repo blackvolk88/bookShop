@@ -1,6 +1,6 @@
 <?php
 
-require_once (dirname(__FILE__).'/../model/Basket.php');
+require_once(dirname(__FILE__) . '/../model/ShoppingCart.php');
 
 class BasketController {
 
