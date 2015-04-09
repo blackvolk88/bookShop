@@ -1,6 +1,6 @@
 
 <!DOCTYPE html>
-<html>
+<html xmlns="http://www.w3.org/1999/html">
 <head>
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
@@ -19,13 +19,14 @@
                     <h3 class="panel-title">Sign In</h3>
                 </div>
                 <div class="panel-body">
-                    <form role="form">
+                    <form role="form" name="Login_Submit" method="post" action="index.php">
                         <fieldset>
                             <div class="form-group">
-                                <input class="form-control" placeholder="E-mail" name="email" type="email" autofocus="">
+                                <input class="form-control" placeholder="E-mail" name="Login" type="email" autofocus="">
                             </div>
                             <div class="form-group">
-                                <input class="form-control" placeholder="Password" name="password" type="password" value="">
+                                <input class="form-control" placeholder="Password" name="Password" type="password"
+                                       value="">
                             </div>
                             <div class="checkbox">
                                 <label>
@@ -33,7 +34,7 @@
                                 </label>
                             </div>
                             <!-- Change this to a button or input when using this as a form -->
-                            <a href="javascript:;" class="btn btn-sm btn-success">Login</a>
+                            <input type="submit" class="btn btn-sm btn-success" value="Login"/>
                         </fieldset>
                     </form>
                 </div>

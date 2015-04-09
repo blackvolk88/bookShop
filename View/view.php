@@ -4,8 +4,12 @@ class view {
     protected $content;
     protected $placeHolders;
 
-    public function __construct($template){
-        $this->content = file_get_contents('templates/' . $template . '.html');
+    public function __construct($template = '')
+    {
+        if (!empty($template))
+            $this->content = file_get_contents('templates/' . $template . '.html');
+        else
+            $this->content = '';
     }
 
     public function setReplacement($data){

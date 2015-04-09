@@ -1,16 +1,22 @@
 <?php
 
 include_once 'View/view.php';
+include_once 'model/Users.php';
 
 class controller {
     protected $view;
     protected $placeHolders;
-    public function __construct($template){
+    protected $user;
+
+    public function __construct($template = '')
+    {
         $this->view = new view($template);
+        $this->user = Users::Instance();
     }
 
     protected function getData(){
-
+        /*if($this->user != null)
+            $this->IsExit = "Exit";*/
     }
 
     protected function setData(){

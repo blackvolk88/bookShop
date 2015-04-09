@@ -22,59 +22,79 @@ class MySql
 
     public function select($query)
     {
-        $result = mysql_query($query);
-        if (!$result) {
-            die('Bad Request: ' . mysql_error());
-        }
-        while ($row = mysql_fetch_assoc($result))
+        $aTemp = array();
+
+        $result = mysql_query($query) or die (mysql_error());
+        $n = mysql_num_rows($result);
+
+        for ($i = 0; $i < $n; $i++)
         {
-            $res[] = $row;
+            $row = mysql_fetch_assoc($result);
+            $aTemp[] = $row;
         }
-        return $res;
+
+        return $aTemp;
     }
 
-    public function insert($table, $data)
+    public function insert($table, $object)
     {
-        $fields = "`" . implode("`,`", array_keys($data)) . "`";
-        $values = "'" . implode("','", $data) . "'";
-        $query = "INSERT INTO " . $table . " (" . $fields . ") " . "VALUES" . " (" . $values . ")";
-        mysql_query($query) or die (mysql_error());
+        $columns = array();
+        $values = array();
+
+        foreach ($object as $key => $value)
+        {
+            $key = mysql_real_escape_string($key . '');
+            $columns[] = $key;
+
+
+            if ($value === null)
+                $values[] = 'NULL';
+            else {
+                $value = mysql_real_escape_string($value . '');
+                $values[] = "'$value'";
+            }
+        }
+
+        $sColumns = implode(',', $columns);
+        $sValues = implode(',', $values);
+
+        $t = "INSERT INTO $table($sColumns) VALUES($sValues)";
+        @mysql_query($t) or die (mysql_error());
         return mysql_insert_id();
     }
 
-    public function update($table, $where, $data)
+    public function update($table, $object, $where)
     {
-        // 'key1'='val', 'key2'='val'
+        if ($table == 'shoppingCart')
+            var_dump($table, $object, $where);
+        exit;
+        $aTemp = array();
 
-        $strData = "";
-        $strWhere = "";
-        foreach($data as $key=>$val)
+        foreach ($object as $key => $value)
         {
-            $strData .= "`" . $key . "`" . "=" . "'" . $val . "'" . ",";
+            $key = mysql_real_escape_string($key . '');
+            if ($value === null)
+                $aTemp[] = "$key = 'NULL'";
+            else {
+                $value = mysql_real_escape_string($value . '');
+                $aTemp[] = "$key = '$value'";
+            }
         }
-        $strData = substr($strData, 0 , -1);
 
-        foreach($where as $key=>$val)
-        {
-            $strWhere .= "`" . $key . "`" . "=" . "'" . $val . "'" . " AND ";
-        }
-        $strWhere = substr($strWhere, 0 , -5);
-
-        $query = "UPDATE " . $table . " SET " . $strData . " WHERE " . $strWhere;
-        mysql_query($query) or die (mysql_error());
+        $sTemp = implode(',', $aTemp);
+        $query = "UPDATE $table SET $sTemp WHERE $where";
+        if ($table == 'shoppingCart')
+            var_dump($query);
+        exit;
+        @mysql_query($query) or die (mysql_error());
+        return mysql_affected_rows();
     }
 
     public function delete($table, $where)
     {
-        $strWhere = "";
-        foreach($where as $key=>$val)
-        {
-            $strWhere .= "`" . $key . "`" . "=" . "'" . $val . "'" . " AND ";
-        }
-        $strWhere = substr($strWhere, 0, -5);
-
-        $query = "DELETE FROM " . $table . " WHERE " . $strWhere;
-        mysql_query($query) or die (mysql_error());
+        $query = "DELETE FROM $table WHERE $where";
+        mysql_query($query);
+        return mysql_affected_rows();
 
     }
 }

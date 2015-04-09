@@ -11,7 +11,7 @@ class ShoppingCart
         $this->mysql = MySql::getInstance();
     }
 
-    public function basketAdd($data)
+    public function addToCart($data)
     {
         $res = $this->mysql->insert('shoppingCart', $data);
         if($res)
@@ -20,7 +20,7 @@ class ShoppingCart
             return false;
     }
 
-    public function basketDelete($id)
+    public function DeleteFromCart($id)
     {
         $where = array('id' =>$id);
         $res = $this->mysql->delete('shoppingCart', $where);
@@ -30,11 +30,11 @@ class ShoppingCart
             return false;
     }
 
-    public function basketUpdate($count, $id)
+    public function updateCart($count, $id, $userId)
     {
-        $data = array('count' => $count);
-        $where = array('id' => $id);
-        $res = $this->mysql->update('shoppingCart', $where, $data);
+        $data = array('Count' => $count);
+        $where = '`id` = ' . $id . ' AND `UserID` = ' . $userId;
+        $res = $this->mysql->update('shoppingCart', $data, $where);
         if($res)
             return true;
         else

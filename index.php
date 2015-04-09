@@ -1,17 +1,25 @@
 <?php
 /*error_reporting(-1) ; // включить все виды ошибок, включая  E_STRICT
 ini_set('display_errors', 'On');  // вывести на экран помимо логов*/
+header("Content-Type: text/html; charset=UTF-8");
 error_reporting(0) ;
 include_once 'controller/mainPageController.php';
 include_once 'controller/bookPageController.php';
 include_once 'controller/shoppingCartController.php';
+include_once 'controller/userController.php';
+include_once 'model/Users.php';
 
-/*if(isset($_POST['Login_Submit']))
+session_start();
+$users = Users::Instance();
+$users->ClearSessions();
+
+if (isset($_POST['Login']))
 {
-    $user = $Users->Login($_POST['Login'], $_POST['Password']);
+
+    $user = $users->Login($_POST['Login'], $_POST['Password']);
     if(!empty($user))
         header("Location: index.php");
-}*/
+}
 
 switch($_GET['action'])
 {
@@ -19,7 +27,7 @@ switch($_GET['action'])
         $controller = new UsersController();
         break;
     case 'Login':
-        $controller = new UsersController();
+        $controller = new UserController();
         break;
     case 'description':
         $controller = new bookPageController();
