@@ -1,7 +1,8 @@
 <?php
 
 include_once "MySql.php";
-class Basket
+
+class ShoppingCart
 {
     private $mysql = null;
 
