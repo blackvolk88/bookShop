@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <meta charset="utf-8">
+    <title>BookShop</title>
+    <meta name="generator" content="Bootply"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link href="templates/css/bootstrap.min.css" rel="stylesheet">
+    <!--[if lt IE 9]>
+    <script src="//html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link href="templates/css/styles.css" rel="stylesheet">
+</head>
+<body>
+<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="#">Bookshop</a>
+        </div>
+        <div class="navbar-collapse collapse">
+            <ul class="nav navbar-nav navbar-right">
+                <li>
+                    <div class="btn-group btn-group-lg" role="group" aria-label="...">
+                        <button type="submit" class="btn btn-
+            default">Basket
+                        </button>
+                    </div>
+                </li>
+                <li><a href="#">Registration</a></li>
+                <li><a href="#">SignIn</a></li>
+                <li><a href="#">SigOut</a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<div class="container-fluid">
+
+    <div class="row row-offcanvas row-offcanvas-left">
+
+        <div class="col-sm-3 col-md-2 sidebar-offcanvas" id="sidebar" role="navigation">
+
+            <!--ul class="nav nav-sidebar">
+                <li class="active"><a href="#">Overview</a></li>
+                <li><a href="#">Reports</a></li>
+                <li><a href="#">Analytics</a></li>
+                <li><a href="#">Export</a></li>
+            </ul>
+            <ul class="nav nav-sidebar">
+                <li><a href="">Nav item</a></li>
+                <li><a href="">Nav item again</a></li>
+                <li><a href="">One more nav</a></li>
+                <li><a href="">Another nav item</a></li>
+                <li><a href="">More navigation</a></li>
+            </ul>
+            <ul class="nav nav-sidebar">
+                <li><a href="">Nav item again</a></li>
+                <li><a href="">One more nav</a></li>
+                <li><a href="">Another nav item</a></li>
+            </ul-->
+
+        </div>
+        <!--/span-->
+
+        <div class="col-sm-9 col-md-10 main">
+
+            <!--toggle sidebar button-->
+            <p class="visible-xs">
+                <button type="button" class="btn btn-primary btn-xs" data-toggle="offcanvas"><i
+                        class="glyphicon glyphicon-chevron-left"></i></button>
+            </p>
+
+            <h1 class="page-header">
+                <%BOOKNAME%>
+
+            </h1>
+
+
+            <div class="row centered-form">
+                <div class="col-md-12">
+                    <div class="col-sm-12 col-md-6">
+                        <h4 class="text-center"><span class="label label-info"></span></h4>
+                        <img src="picture-14007.jpg" class="img-responsive">
+
+                        <div class="caption">
+                            <div class="row">
+                                <div class="col-md-6 col-xs-6">
+                                </div>
+                                <div class="col-md-10 col-xs-6 price">
+                                    <h3><label><%BOOKPRICE%></label></h3>
+                                </div>
+                            </div>
+                            <p><%BOOKDESCRIPTION%></p>
+
+                            <div class="col-md-10">
+                                <a href="index.php" class="btn btn-primary btn-product"><span
+                                        class="glyphicon glyphicon-thumbs-up"></span> Back</a>
+                            </div>
+                            <div class="col-md-2">
+                                <a href="index.php?action=addtocart&id=<%BOOKID%>"
+                                   class="btn btn-success btn-product"><span
+                                        class="glyphicon glyphicon-shopping-cart"></span> Buy</a></div>
+                        </div>
+                        <p></p>
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+        <!--/row-->
+    </div>
+</div>
+<!--/.container-->
+
+<footer>
+    <p class="pull-right">©2015S Company</p>
+</footer>
+
+<!-- script references -->
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.2/jquery.min.js"></script>
+<script src="templates/js/bootstrap.min.js"></script>
+<script src="templates/js/scripts.js"></script>
+</body>
+</html>
+
+
